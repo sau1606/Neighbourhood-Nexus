@@ -1,22 +1,37 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '/firebase'; // Adjust the import path if necessary
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const SignUp: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement sign up logic
-    console.log('Sign up attempt', { name, email, password, confirmPassword });
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log('Sign up successful');
+      navigate('/'); // Redirect to homepage or desired route after signup
+    } catch (error) {
+      setError('Sign up failed: ' + error.message);
+      console.error('Sign up failed', error);
+    }
   };
 
   return (
     <div className="max-w-md mx-auto mt-10">
       <h1 className="text-3xl font-bold mb-6 text-center">Sign Up</h1>
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {error && <p className="text-red-500 text-xs italic">{error}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
             Full Name

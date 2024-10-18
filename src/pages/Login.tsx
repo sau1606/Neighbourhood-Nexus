@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from "../firebase"; // Adjust the import path if necessary
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement login logic
-    console.log('Login attempt', { email, password });
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log('Login successful');
+      navigate('/'); // Redirect to homepage or desired route after login
+    } catch (error) {
+      setError('Login failed: ' + error.message);
+      console.error('Login failed', error);
+    }
   };
 
   return (
     <div className="max-w-md mx-auto mt-10">
       <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {error && <p className="text-red-500 text-xs italic">{error}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
             Email
