@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import c1 from '../components/c1.jpg';
+import c2 from '../components/c2.jpg';
+import c3 from '../components/c3.jpg';
+import c4 from '../components/c4.avif';
+import commscrisis from '../components/commscrisis.jpeg';
 
 const Home: React.FC = () => {
   return (
@@ -7,8 +12,7 @@ const Home: React.FC = () => {
       <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#190019] font-inter">
         Welcome to Neighbourhood Nexus
       </h1>
-      {/* Make the image 15% bigger */}
-      <img src="src/components/commscrisis.jpeg" alt="Neighborhood" className="mt-6 w-[57.5%] h-auto rounded-lg shadow-md" />
+      <img src={commscrisis} alt="Neighborhood" className="mt-6 w-[57.5%] h-auto rounded-lg shadow-md" />
       <p className="text-xl mb-4 text-[#522858] font-inter">
         Empowering Communities, One Connection at a Time.
       </p>
@@ -23,7 +27,7 @@ const Home: React.FC = () => {
       <div className="w-full max-w-6xl mt-12 space-y-12">
         {/* Local Listings Feature */}
         <div className="flex flex-col md:flex-row items-center justify-between">
-          <img src="src/components/c1.jpg" alt="Local Listings" className="w-full md:w-1/2 h-auto rounded-lg shadow-md" />
+          <img src={c1} alt="Local Listings" className="w-full md:w-1/2 h-auto rounded-lg shadow-md" />
           <div className="w-full md:w-1/2 md:pl-6 flex flex-col items-start">
             <h2 className="text-2xl font-semibold mb-4 font-inter">Local Listings</h2>
             <p className="font-inter mb-4">Find What You Need, Just Around The Corner.</p>
@@ -33,9 +37,9 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Services Feature (Image on the Right) */}
+        {/* Services Feature */}
         <div className="flex flex-col md:flex-row-reverse items-center justify-between">
-          <img src="src/components/c3.jpg" alt="Services" className="w-full md:w-1/2 h-auto rounded-lg shadow-md" />
+          <img src={c3} alt="Services" className="w-full md:w-1/2 h-auto rounded-lg shadow-md" />
           <div className="w-full md:w-1/2 md:pr-6 flex flex-col items-start">
             <h2 className="text-2xl font-semibold mb-4 font-inter">Services</h2>
             <p className="font-inter mb-4">Need a Hand? Your Neighbours Are Here to Help.</p>
@@ -47,7 +51,7 @@ const Home: React.FC = () => {
 
         {/* Community Events Feature */}
         <div className="flex flex-col md:flex-row items-center justify-between">
-          <img src="src/components/c4.avif" alt="Community Events" className="w-full md:w-1/2 h-auto rounded-lg shadow-md" />
+          <img src={c4} alt="Community Events" className="w-full md:w-1/2 h-auto rounded-lg shadow-md" />
           <div className="w-full md:w-1/2 md:pl-6 flex flex-col items-start">
             <h2 className="text-2xl font-semibold mb-4 font-inter">Community Events</h2>
             <p className="font-inter mb-4">Build Bonds Beyond Your Doorstep.</p>
@@ -57,9 +61,9 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Emergency Assistance Feature (Image on the Right) */}
+        {/* Emergency Assistance Feature */}
         <div className="flex flex-col md:flex-row-reverse items-center justify-between">
-          <img src="src/components/c2.jpg" alt="Emergency Assistance" className="w-full md:w-1/2 h-auto rounded-lg shadow-md" />
+          <img src={c2} alt="Emergency Assistance" className="w-full md:w-1/2 h-auto rounded-lg shadow-md" />
           <div className="w-full md:w-1/2 md:pr-6 flex flex-col items-start">
             <h2 className="text-2xl font-semibold mb-4 font-inter">Emergency Assistance</h2>
             <p className="font-inter mb-4">When Urgency Strikes, Your Neighbours Have Your Back.</p>
