@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth } from "../firebase"; // Adjust the import path if necessary
+import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login: React.FC = () => {
@@ -15,8 +15,27 @@ const Login: React.FC = () => {
       await signInWithEmailAndPassword(auth, email, password);
       console.log('Login successful');
       navigate('/'); // Redirect to homepage or desired route after login
-    } catch (error) {
-      setError('Login failed: ' + error.message);
+    } catch (error: any) {
+      // Map Firebase error codes to readable error messages
+      switch (error.code) {
+        case 'auth/invalid-email':
+          setError('Invalid email address.');
+          break;
+        case 'auth/user-disabled':
+          setError('User account is disabled.');
+          break;
+        case 'auth/user-not-found':
+          setError('No user found with this email.');
+          break;
+        case 'auth/wrong-password':
+          setError('Incorrect password.');
+          break;
+        case 'auth/invalid-credential':
+          setError('Invalid credentials provided.');
+          break;
+        default:
+          setError('Login failed. Please try again.');
+      }
       console.error('Login failed', error);
     }
   };
